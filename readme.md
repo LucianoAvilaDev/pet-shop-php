@@ -14,8 +14,8 @@ Projeto de um sistema web para gerenciar Pet-Shops utilizando as tecnologias:
       - Ferramenta de SGBD: Laragon
     
     - Frontend: 
-      - Linguagem: a definir
-      - Framework: a definir 
+      - Linguagem: Laravel
+      - Ferramenta de Template: Blade 
       - Ferramenta de prototipagem: Figma
  
 
