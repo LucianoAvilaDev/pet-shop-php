@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('client_id')->index()->foreign()->references('id')->on('clients');
+            $table->uuid('client_id');
             $table->string('name');
             $table->string('species');
             $table->string('breed');
@@ -25,14 +25,13 @@ return new class extends Migration
             $table->string('size');
             $table->string('photo')->nullable();
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients');
+
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('animals');

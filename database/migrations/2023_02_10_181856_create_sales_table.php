@@ -15,21 +15,20 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('client_id')->index()->foreign()->references('id')->on('clients');
-            $table->uuid('user_id')->index()->foreign()->references('id')->on('users');
+            $table->uuid('client_id');
+            $table->uuid('user_id');
             $table->dateTime('date');
             $table->decimal('total_value', 8, 4);
             $table->dateTime('payment_date')->nullable();
             $table->decimal('paid_value', 8, 4)->nullable();
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('sales');

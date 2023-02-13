@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('unit_of_measurement_id')->index()->foreign()->references('id')->on('unit_of_measurements');
+            $table->uuid('unit_of_measurement_id');
             $table->string('code');
             $table->string('name');
             $table->mediumText('description');
@@ -24,14 +24,12 @@ return new class extends Migration
             $table->decimal('stock_quantity', 8, 4);
             $table->decimal('storage_quantity', 8, 4);
             $table->timestamps();
+
+            $table->foreign('unit_of_measurement_id')->references('id')->on('unit_of_measurements');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('products');

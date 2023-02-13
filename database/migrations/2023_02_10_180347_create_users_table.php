@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('role_id')->index()->foreign()->references('id')->on('roles');
+            $table->uuid('role_id');
             $table->string('name');
             $table->string('username');
             $table->string('email');
@@ -28,14 +28,13 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('role_id')->references('id')->on('roles');
+
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('users');

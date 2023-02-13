@@ -15,21 +15,20 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->index()->foreign()->references('id')->on('users')->delete('cascade');
+            $table->uuid('user_id');
             $table->mediumText('observations')->nullable();
             $table->dateTime('purchase_date_time');
             $table->decimal('total_value', 8, 2);
             $table->dateTime('payment_date_time')->nullable();
             $table->decimal('paid_value', 8, 2)->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('purchases');

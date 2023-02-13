@@ -15,21 +15,20 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('laboratory_id')->index()->foreign()->references('id')->on('laboratories');
-            $table->uuid('veterinarian_id')->index()->foreign()->references('id')->on('veterinarians');
+            $table->uuid('laboratory_id');
+            $table->uuid('veterinarian_id');
             $table->string('name');
             $table->mediumText('description');
             $table->integer('conclusion_days');
             $table->decimal('value', 8, 4);
             $table->timestamps();
+
+            $table->foreign('laboratory_id')->references('id')->on('laboratories');
+            $table->foreign('veterinarian_id')->references('id')->on('veterinarians');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('exams');

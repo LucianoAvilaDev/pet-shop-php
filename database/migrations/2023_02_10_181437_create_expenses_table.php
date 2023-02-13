@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->index()->foreign()->references('id')->on('users')->delete('cascade');
+            $table->uuid('user_id');
             $table->string('description');
             $table->mediumText('observations')->nullable();
             $table->decimal('total_value', 8, 2);
@@ -23,14 +23,13 @@ return new class extends Migration
             $table->dateTime('payment_date_time')->nullable();
             $table->dateTime('deadline_date_time')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('expenses');
