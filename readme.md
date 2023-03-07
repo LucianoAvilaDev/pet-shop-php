@@ -2,6 +2,7 @@
 
 ## **Especificações**
 <br>
+**PROJETO EM ANDAMENTO...**
 Projeto de um sistema web para gerenciar Pet-Shops utilizando as tecnologias:
 
 - Web:
